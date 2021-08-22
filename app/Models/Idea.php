@@ -28,7 +28,9 @@ class Idea extends Model
         ];
     }
 
-    //relations
+    /**
+     * relations
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -38,4 +40,10 @@ class Idea extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
+
 }
