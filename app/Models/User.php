@@ -60,7 +60,7 @@ class User extends Authenticatable
         } else {
             $integerToUse = ord(strtolower($firstCharacter)) - 96;
         }
-
+  
         return 'https://www.gravatar.com/avatar/'
             .md5($this->email)
             .'?s=200'
