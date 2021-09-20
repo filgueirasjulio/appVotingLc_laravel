@@ -22,7 +22,7 @@ class StatusTest extends TestCase
 
         $statusOpen = Status::factory()->create(['name' => 'Open']);
         $statusConsidering = Status::factory()->create(['name' => 'Considering']);
-        $statusInProgress = Status::factory()->create(['name' => 'In Progress']);
+        $statusInProgress = Status::factory()->create(['name' => 'Considering']);
         $statusImplemented = Status::factory()->create(['name' => 'Implemented']);
         $statusClosed = Status::factory()->create(['name' => 'Closed']);
 

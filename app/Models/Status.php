@@ -9,13 +9,11 @@ class Status extends Model
 {
     use HasFactory;
 
-    /*relations*/
     public function ideas()
     {
         return $this->hasMany(Idea::class);
     }
-    /*end relations*/
-    
+
     public static function getCount()
     {
         return Idea::query()

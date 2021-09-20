@@ -13,7 +13,7 @@ module.exports = {
             colors: {
                 transparent: 'transparent',
                 current: 'currentColor',
-    
+
                 black: colors.black,
                 white: colors.white,
                 gray: colors.trueGray,
@@ -44,8 +44,8 @@ module.exports = {
                 sans: ['Open Sans', ...defaultTheme.fontFamily.sans],
             },
             fontSize: {
-                xxs: ['0.625rem', { lineHeight: '1rem'}],
-            }
+                xxs: ['0.625rem', { lineHeight: '1rem' }],
+            },
         },
     },
 

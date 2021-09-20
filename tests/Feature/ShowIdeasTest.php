@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use App\Models\Idea;
-use App\Models\User;
-use App\Models\Status;
 use App\Models\Category;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Models\Idea;
+use App\Models\Status;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
 
 class ShowIdeasTest extends TestCase
 {
@@ -20,7 +20,6 @@ class ShowIdeasTest extends TestCase
         $user = User::factory()->create();
 
         $categoryOne = Category::factory()->create(['name' => 'Category 1']);
-
         $categoryTwo = Category::factory()->create(['name' => 'Category 2']);
 
         $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
@@ -48,12 +47,10 @@ class ShowIdeasTest extends TestCase
         $response->assertSee($ideaOne->title);
         $response->assertSee($ideaOne->description);
         $response->assertSee($categoryOne->name);
-        $response->assertSee($statusOpen->name);
         $response->assertSee('<div class="bg-gray-200 text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Open</div>', false);
         $response->assertSee($ideaTwo->title);
         $response->assertSee($ideaTwo->description);
         $response->assertSee($categoryTwo->name);
-        $response->assertSee($statusConsidering->name);
         $response->assertSee('<div class="bg-purple text-white text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Considering</div>', false);
     }
 
@@ -79,8 +76,7 @@ class ShowIdeasTest extends TestCase
         $response->assertSuccessful();
         $response->assertSee($idea->title);
         $response->assertSee($idea->description);
-        $response->assertSee($idea->category->name);
-        $response->assertSee($idea->status->name);
+        $response->assertSee($categoryOne->name);
         $response->assertSee('<div class="bg-gray-200 text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Open</div>', false);
     }
 
@@ -111,12 +107,11 @@ class ShowIdeasTest extends TestCase
 
         $response->assertSee($ideaEleven->title);
         $response->assertDontSee($ideaOne->title);
-      
+
         $response = $this->get('/?page=2');
 
-        $response->assertSee($ideaOne->title );
+        $response->assertSee($ideaOne->title);
         $response->assertDontSee($ideaEleven->title);
-     
     }
 
     /** @test */
@@ -145,13 +140,13 @@ class ShowIdeasTest extends TestCase
         ]);
 
         $response = $this->get(route('idea.show', $ideaOne));
- 
+
         $response->assertSuccessful();
         $this->assertTrue(request()->path() === 'ideas/my-first-idea');
 
         $response = $this->get(route('idea.show', $ideaTwo));
 
         $response->assertSuccessful();
-        $this->assertTrue(request()->path() === 'ideas/my-first-idea-2');
+        $this->assertTrue(request()->path() === 'ideas/my-first-idea-1');
     }
 }

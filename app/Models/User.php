@@ -41,7 +41,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function Ideas()
+    public function ideas()
     {
         return $this->hasMany(Idea::class);
     }
@@ -50,17 +50,15 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Idea::class, 'votes');
     }
-    
+
     public function getAvatar()
     {
         $firstCharacter = $this->email[0];
 
-        if (is_numeric($firstCharacter)) {
-            $integerToUse = ord(strtolower($firstCharacter)) - 21;
-        } else {
-            $integerToUse = ord(strtolower($firstCharacter)) - 96;
-        }
-  
+        $integerToUse = is_numeric($firstCharacter)
+            ? ord(strtolower($firstCharacter)) - 21
+            : ord(strtolower($firstCharacter)) - 96;
+
         return 'https://www.gravatar.com/avatar/'
             .md5($this->email)
             .'?s=200'
