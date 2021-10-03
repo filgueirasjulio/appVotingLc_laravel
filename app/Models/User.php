@@ -66,4 +66,14 @@ class User extends Authenticatable
             .$integerToUse
             .'.png';
     }
+
+    public function isAdmin()
+    {
+        return in_array($this->email, [
+            'julio@dindigital.com',
+            'julio_filgueiras@live.com'
+        ]);
+
+        
+    }
 }
