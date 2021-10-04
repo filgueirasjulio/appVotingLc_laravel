@@ -73,7 +73,5 @@ class User extends Authenticatable
             'julio@dindigital.com',
             'julio_filgueiras@live.com'
         ]);
-
-        
     }
 }
