@@ -14,13 +14,15 @@
     />
 
     @can('update', $idea)
-    <livewire:edit-idea  :idea="$idea"/>
+        <livewire:edit-idea :idea="$idea" />
     @endcan
 
-    <livewire:delete-idea :idea="$idea"/>
+    @can('delete', $idea)
+        <livewire:delete-idea :idea="$idea" />
+    @endcan
 
     @auth
-    <livewire:mark-idea-as-spam :idea="$idea" />
+        <livewire:mark-idea-as-spam :idea="$idea" />
     @endauth
 
     @admin

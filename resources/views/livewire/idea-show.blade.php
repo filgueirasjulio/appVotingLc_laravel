@@ -11,11 +11,14 @@
                 <h4 class="text-xl font-semibold mt-2 md:mt-0">
                     {{ $idea->title }}
                 </h4>
-                @admin
-                    @if ($idea->spam_reports > 0)
-                        <div class="text-red mb-2">Spam Reports: {{ $idea->spam_reports }}</div>
-                    @endif
-                @endadmin
+                <div class="text-gray-600 mt-3">
+                    @admin
+                        @if ($idea->spam_reports > 0)
+                            <div class="text-red mb-2">Spam Reports: {{ $idea->spam_reports }}</div>
+                        @endif
+                    @endadmin
+                    {{ $idea->description }}
+                </div>
 
                 <div class="flex flex-col md:flex-row md:items-center justify-between mt-6">
                     <div class="flex items-center text-xs text-gray-400 font-semibold space-x-2">
@@ -31,7 +34,7 @@
                         class="flex items-center space-x-2 mt-4 md:mt-0"
                         x-data="{ isOpen: false }"
                     >
-                    <div class="{{ $idea->status->classes }} text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">{{ $idea->status->name }}</div>
+                        <div class="{{ $idea->status->classes }} text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">{{ $idea->status->name }}</div>
                         @auth
                         <div class="relative">
                             <button
@@ -61,6 +64,7 @@
                                     </a>
                                 </li>
                                 @endcan
+
                                 @can('delete', $idea)
                                 <li>
                                     <a
@@ -75,6 +79,7 @@
                                     </a>
                                 </li>
                                 @endcan
+
                                 <li>
                                     <a
                                         href="#"
@@ -84,25 +89,26 @@
                                         "
                                         class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3"
                                     >
-                                       Mark as Spam
-                                    </a>
-                                </li>  
-                                @admin
-                                @if ($idea->spam_reports > 0)
-                                <li>
-                                    <a
-                                        href="#"
-                                        @click.prevent="
-                                            isOpen = false
-                                            $dispatch('custom-show-mark-idea-as-not-spam-modal')
-                                        "
-                                        class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3"
-                                    >
-                                        Not Spam
+                                        Mark as Spam
                                     </a>
                                 </li>
-                                @endif
-                                @endadmin        
+
+                                @admin
+                                    @if ($idea->spam_reports > 0)
+                                    <li>
+                                        <a
+                                            href="#"
+                                            @click.prevent="
+                                                isOpen = false
+                                                $dispatch('custom-show-mark-idea-as-not-spam-modal')
+                                            "
+                                            class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3"
+                                        >
+                                            Not Spam
+                                        </a>
+                                    </li>
+                                    @endif
+                                @endadmin
                             </ul>
                         </div>
                         @endauth
@@ -183,6 +189,7 @@
             @admin
                 <livewire:set-status :idea="$idea" />
             @endadmin
+
         </div>
 
         <div class="hidden md:flex items-center space-x-3">
