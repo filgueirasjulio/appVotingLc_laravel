@@ -34,7 +34,7 @@ class SetStatus extends Component
             session()->flash('success_message', 'Emails sent successfully.');
         }
 
-        $this->emit('statusWasUpdated');
+        $this->emit('statusWasUpdated', 'Status was updated successfully!');
     }
 
     public function render()
