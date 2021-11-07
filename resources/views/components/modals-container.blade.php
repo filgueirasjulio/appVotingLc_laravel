@@ -13,3 +13,5 @@
 @admin
     <livewire:mark-idea-as-not-spam :idea="$idea" />
 @endadmin
+
+<livewire:edit-comment />
