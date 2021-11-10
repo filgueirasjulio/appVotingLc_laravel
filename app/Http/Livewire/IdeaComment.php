@@ -10,7 +10,11 @@ class IdeaComment extends Component
     public $comment;
     public $ideaUserId;
 
-    protected $listeners = ['commentWasUpdated'];
+    protected $listeners = [
+        'commentWasUpdated',
+        'commentWasMarkedAsSpam',
+        'commentWasMarkedAsNotSpam',
+    ];
 
     public function mount(Comment $comment, $ideaUserId)
     {
@@ -23,8 +27,18 @@ class IdeaComment extends Component
         $this->comment->refresh();
     }
 
-    public function render()
+    public function commentWasMarkedAsSpam()
     {
+        $this->comment->refresh();
+    }
+
+    public function commentWasMarkedAsNotSpam()
+    {
+        $this->comment->refresh();
+    }
+
+    public function render()
+{
         return view('livewire.idea-comment');
     }
 }
