@@ -1,7 +1,12 @@
 <div
     class="relative"
     x-data="{ isOpen: false }"
-    >
+    x-init="
+        window.livewire.on('statusWasUpdated', () => {
+            isOpen = false
+        })
+    "
+>
     <button
         type="button"
         @click="isOpen = !isOpen"
@@ -54,7 +59,7 @@
             </div>
 
             <div>
-                <textarea name="update_comment" id="update_comments" cols="30" rows="3" class="w-full text-sm bg-gray-100 rounded-xl placeholder-gray-900 border-none px-4 py-2" placeholder="Add an update comment (optional)"></textarea>
+                <textarea wire:model="comment" name="update_comment" id="update_comments" cols="30" rows="3" class="w-full text-sm bg-gray-100 rounded-xl placeholder-gray-900 border-none px-4 py-2" placeholder="Add an update comment (optional)"></textarea>
             </div>
 
             <div class="flex items-center justify-between space-x-3">
@@ -69,9 +74,7 @@
                 </button>
                 <button
                     type="submit"
-                    class="flex items-center justify-center w-1/2 h-11 text-xs bg-blue text-white font-semibold rounded-xl
-                    border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-
-                    disabled:opacity-50"
+                    class="flex items-center justify-center w-1/2 h-11 text-xs bg-blue text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3 disabled:opacity-50"
                 >
                     <span class="ml-1">Update</span>
                 </button>
@@ -82,23 +85,6 @@
                     <input wire:model="notifyAllVoters" type="checkbox" name="notify_voters" class="rounded bg-gray-200">
                     <span class="ml-2">Notify all voters</span>
                 </label>
-            </div>
-
-            <div>
-                @if (session('success_message'))
-                    <div
-                        x-data="{ isVisible: true }"
-                        x-init="
-                            setTimeout(() => {
-                                isVisible = false
-                            }, 5000)
-                        "
-                        x-show.transition.duration.1000ms="isVisible"
-                        class="text-green mt-4"
-                    >
-                        {{ session('success_message') }}
-                    </div>
-                @endif
             </div>
         </form>
     </div>
