@@ -29,7 +29,7 @@ class NotifyAllVoters implements ShouldQueue
     }
 
     /**
-     * Execute the job.
+     * Execute  IdeaStatusUpdatedMailable the job.
      *
      * @return void
      */
